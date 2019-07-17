@@ -1,20 +1,4 @@
-/* Algoritma Kriptografi Vigenere Cipher
-Rumus enkripsi vigenere cipher :
-Pi = (Ci-Ki) mod 26
-atau
-Ci = ( Pi + Ki ) – 26, kalau hasil penjumlahan Pi dan Ki lebih dari 26
-
-Rumus dekripsi vigenere cipher :
-Pi = (Ci-Ki) mod 26
-atau
-Pi = ( Ci – Ki ) + 26, kalau hasil pengurangan Ci dengan Ki minus
-
-Keterangan:
-Ci = nilai desimal karakter ciphertext ke-i
-Pi = nilai desimal karakter plaintext ke-i
-Ki = nilai desimal karakter kunci ke-i
-
-Nilai desimal karakter: A=0 B=1 C=2 ... Z=25
+/* enkripsi dengan memgabungkan vegenere cipher dengan ceaser cipher
 */
 
 #include <iostream>
@@ -73,7 +57,7 @@ class Vigenere {
 
 int main()
 {
-	int pilihan;
+	int pilihan, i;
 	string str, kunci;
 	
 	cout << "Masukan Plantaxt: ";
@@ -88,21 +72,29 @@ int main()
 	
 	string original=str;
 	Vigenere chiper=kunci;
-	string encrypted = chiper.enkrip(original);	
+	string encrypted = chiper.enkrip(original);
+	string enc=encrypted;
+	string dec = original;
 	string decrypted = chiper.dekrip(original);
-
+	
 	switch(pilihan){
 		//Enkripsi
 		case 1:
+		for (i=0; (i<100 && enc[i] != '\0'); i++){ //penambahan enkripsi ceaser cipher
+			enc[i] = enc[i] + 8524;
+		}
 		cout << " Plantaxt: " << original <<endl;
-		cout<<" Enkripsi: " <<encrypted <<endl;
+		cout<<" Enkripsi: " <<enc <<endl;
 
 		break;
 		
 		//Dekripsi
 		case 2:
+		for (i=0; (i<100 && dec[i] != '\0'); i++){
+			dec[i] = dec[i] - 8524;
+		}
 		cout << " Ciphertext: "<< original <<endl;
-		cout<<" Dekripsi: " <<decrypted <<endl;
+		cout<<" Dekripsi: " <<dec <<endl;
 		
 		break;
 		
